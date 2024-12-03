@@ -1,0 +1,188 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>LIBRARY MANAGEMENT</title>
+    <link href="StyleSheet2.css" rel="stylesheet" />
+
+    <!--Icons css link-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style type="text/css">
+ body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+#navbar {
+            background-color: #fff;
+            color: #000f;
+            z-index:1;
+            padding: 10px 20px;
+            justify-content:flex-end;
+            align-items: center;
+        }
+
+        #navbar #date {
+            font-size: 16px;
+        }
+
+#sidebar {
+    background-image:url("img/sidebar-e.png");
+    position: fixed;
+    width: 230px; /* Set a fixed width for the sidebar */
+    min-width: 230px; /* minimum width to prevent it from becoming too narrow */
+    height: 100%;
+    background-color: #333;
+    padding-top: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    transform-origin: top left; /* Set the origin for scaling */
+    transform: scale(calc(100% / 230px)); /* Set initial scale based on fixed width */
+}
+
+@media screen and (max-width: 768px) {
+    /* Adjust scale for smaller screens */
+    #sidebar {
+        transform: scale(calc(100% / 250px)); /* Adjust scale for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Adjust scale for even smaller screens */
+    #sidebar {
+        transform: scale(calc(100% / 200px)); /* Adjust scale for even smaller screens */
+    }
+}
+
+
+        /* Add other styles as needed */
+
+#logo-container {
+    margin-top: 30px; 
+    text-align: center; /* Center the logo horizontally */
+}
+
+#logo {
+    width: 100%; 
+    max-width: 230px; 
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 20px; /* Adjust as needed */
+}
+
+
+        #profile {
+            
+            margin-top:-25px;
+            text-align: center;
+            padding: 40px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-bottom: 10px;
+        }
+
+         #lblname{
+             text-transform:capitalize;
+            color: #47dbfc;
+            font-size: 20px;
+            font-family:Poppins;
+            margin: 0;
+        }
+
+.btnmenu {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #232f3f;
+    border: none; /* Set border to none */
+    transition: background-color 0.3s;
+    
+}
+
+.btnmenu:hover {
+    background-color: #072735;
+    color:#30b2ee;
+}
+
+
+        /* Main content styling */
+        #main {
+            margin-left: 230px; /* Adjust according to sidebar width */
+            padding: 20px;
+        }
+        /* Additional styles as needed */
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="navbar">
+        <div id="date">
+            <%-- Use server-side code to get the current date --%>
+            <%= DateTime.Now.ToString("dd MMMM yyyy") %>
+        </div>
+    </div>
+    
+    <form id="form1" runat="server">
+        <div id="sidebar">
+            <div id="profile">
+                <img src="img/profile.jpg" alt="Profile Photo" />
+                <asp:Label ID="lblname" runat="server" Color="#fff"></asp:Label>
+            </div>
+            <div id="button-container"> <!-- New div for button container -->
+        <asp:Button ID="Button11" runat="server" CssClass="btnmenu add-publication" Text="ADD PUBLICATION" 
+            PostBackUrl="~/Publication.aspx" CausesValidation="False"  onclick="Button11_Click" />
+        <asp:Button ID="Button1" runat="server" CssClass="btnmenu add-book" Text="ADD BOOK" 
+            PostBackUrl="~/Addbook.aspx" CausesValidation="False" />
+        <asp:Button ID="Button2" runat="server" CssClass="btnmenu" Text="BOOK REPORT" 
+            CausesValidation="False" PostBackUrl="~/bookreport.aspx" />
+        <asp:Button ID="Button3" runat="server" CssClass="btnmenu" Text="ADD BRANCH" 
+            PostBackUrl="~/Addbranch.aspx" CausesValidation="False" />
+        <asp:Button ID="Button4" runat="server" CssClass="btnmenu" Text="ADD STUDENT" 
+            PostBackUrl="~/AddStudent.aspx" CausesValidation="False" />
+        <asp:Button ID="Button5" runat="server" CssClass="btnmenu" Text="STUDENT REPORT" 
+            CausesValidation="False" PostBackUrl="~/Studenteport.aspx" />
+        <asp:Button ID="Button6" runat="server" CssClass="btnmenu" Text="ISSUE BOOK" 
+            CausesValidation="False" PostBackUrl="~/BookIssue.aspx" />
+        <asp:Button ID="Button7" runat="server" CssClass="btnmenu" Text="ISSUE REPORT" 
+            CausesValidation="False" PostBackUrl="~/Issuereport.aspx" />
+        <asp:Button ID="Button8" runat="server" CssClass="btnmenu" Text="RETURN BOOK" 
+            CausesValidation="False" PostBackUrl="~/BookReturn.aspx" />
+        <asp:Button ID="Button9" runat="server" CssClass="btnmenu" Text="PENALTY" 
+            CausesValidation="False" PostBackUrl="~/Panalty.aspx" />
+        <asp:Button ID="Button10" runat="server" CssClass="btnmenu" Text="LogOut" 
+            CausesValidation="False" onclick="Button10_Click"  />
+
+        </div>
+            <div id="logo-container">
+    <img id="logo" src="img/lxcOGO.png" alt="Logo" />
+</div>
+        </div>
+        <div id="main">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+
+
+
+
+
+</body>
+</html>
